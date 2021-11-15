@@ -10,15 +10,15 @@ public class TicketInformation implements Comparable<TicketInformation> {
     private String arrivalAirport;
     private int travelTimeMinutes;
 
-    public TicketInformation() {
-    }
-
     public TicketInformation(int id, int price, String departureAirport, String arrivalAirport, int travelTimeMinutes) {
         this.id = id;
         this.price = price;
         this.departureAirport = departureAirport;
         this.arrivalAirport = arrivalAirport;
         this.travelTimeMinutes = travelTimeMinutes;
+    }
+    
+    public TicketInformation() {
     }
 
     public boolean matches(String from, String to) {
