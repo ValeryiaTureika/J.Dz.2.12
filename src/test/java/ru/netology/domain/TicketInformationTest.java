@@ -12,7 +12,6 @@ import static org.junit.jupiter.api.Assertions.*;
 class TicketInformationTest {
 
     private final ProductManager manager = new ProductManager(new ProductRepository());
-    private ProductRepository repo = new ProductRepository();
 
     private final TicketInformation first = new TicketInformation(1, 2199, "DME", "LED", 95);
     private final TicketInformation second = new TicketInformation(2, 1199, "LED", "KUF", 95);
@@ -49,7 +48,7 @@ class TicketInformationTest {
     void shouldSearchOneTicket() {
 
         TicketInformation[] expected = new TicketInformation[]{second};
-        TicketInformation[] actual = manager.searchBy("LED", "KUF");
+        TicketInformation[] actual = manager.findAll("LED", "KUF");
 
         assertArrayEquals(expected, actual);
     }
@@ -58,9 +57,8 @@ class TicketInformationTest {
     void shouldSearchTwoTickets() {
 
         TicketInformation[] expected = new TicketInformation[]{second, third};
-        TicketInformation[] actual = manager.searchBy("LED", "FRU");
+        TicketInformation[] actual = manager.findAll("LED", "FRU");
 
-        Arrays.sort(actual);
         assertArrayEquals(expected, actual);
     }
 
@@ -68,9 +66,8 @@ class TicketInformationTest {
     void shouldSearchThreeTickets() {
 
         TicketInformation[] expected = new TicketInformation[]{second, fourth, first};
-        TicketInformation[] actual = manager.searchBy("LED", "LED");
+        TicketInformation[] actual = manager.findAll("LED", "LED");
 
-        Arrays.sort(actual);
         assertArrayEquals(expected, actual);
     }
 }

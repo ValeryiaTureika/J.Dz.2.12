@@ -10,18 +10,6 @@ public class TicketInformation implements Comparable<TicketInformation> {
     private String arrivalAirport;
     private int travelTimeMinutes;
 
-    @Override
-    public int compareTo(TicketInformation o) {
-        double diff = this.price - o.price;
-        if (diff == 0) {
-            return 0;
-        } else if (diff < 0) {
-            return -1;
-        } else {
-            return 1;
-        }
-    }
-
     public TicketInformation() {
     }
 
@@ -32,6 +20,11 @@ public class TicketInformation implements Comparable<TicketInformation> {
         this.arrivalAirport = arrivalAirport;
         this.travelTimeMinutes = travelTimeMinutes;
     }
+
+    public boolean matches(String from, String to) {
+        return departureAirport.contains(from) || arrivalAirport.contains(to);
+    }
+
 
     public int getId() {
         return id;
@@ -71,6 +64,18 @@ public class TicketInformation implements Comparable<TicketInformation> {
 
     public void setTravelTimeMinutes(int travelTimeMinutes) {
         this.travelTimeMinutes = travelTimeMinutes;
+    }
+
+    @Override
+    public int compareTo(TicketInformation o) {
+        double diff = this.price - o.price;
+        if (diff == 0) {
+            return 0;
+        } else if (diff < 0) {
+            return -1;
+        } else {
+            return 1;
+        }
     }
 
     @Override

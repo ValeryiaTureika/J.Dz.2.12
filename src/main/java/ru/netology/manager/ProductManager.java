@@ -3,39 +3,34 @@ package ru.netology.manager;
 import ru.netology.domain.TicketInformation;
 import ru.netology.repository.ProductRepository;
 
+import java.util.Arrays;
+
 public class ProductManager {
-    private ProductRepository repo;
+    private ProductRepository repository;
 
     public ProductManager(ProductRepository repository) {
-        this.repo = repository;
+        this.repository = repository;
     }
 
-    public void add(TicketInformation item) {
-        repo.save(item);
+    public void add(TicketInformation ticket) {
+        repository.save(ticket);
     }
 
     public void removeById(int id) {
-        repo.removeById(id);
+        repository.removeById(id);
     }
 
-    public TicketInformation[] searchBy(String from, String to) {
+    public TicketInformation[] findAll(String departureAirport, String arrivalAirport) {
         TicketInformation[] result = new TicketInformation[0];
-        TicketInformation[] tickets = repo.findAll();
-        for (TicketInformation ticket : tickets) {
-            if (matches(ticket, from, to)) {
+        for (TicketInformation ticket : repository.findAll()) {
+            if (ticket.matches(departureAirport, arrivalAirport)) {
                 TicketInformation[] tmp = new TicketInformation[result.length + 1];
                 System.arraycopy(result, 0, tmp, 0, result.length);
                 tmp[tmp.length - 1] = ticket;
                 result = tmp;
+                Arrays.sort(result);
             }
         }
         return result;
-    }
-
-    public boolean matches(TicketInformation ticket, String from, String to) {
-        if (ticket.getDepartureAirport().contains(from) || ticket.getArrivalAirport().contains(to)) {
-            return true;
-        }
-        return false;
     }
 }
