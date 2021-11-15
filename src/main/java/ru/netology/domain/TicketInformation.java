@@ -25,7 +25,6 @@ public class TicketInformation implements Comparable<TicketInformation> {
         return departureAirport.contains(from) || arrivalAirport.contains(to);
     }
 
-
     public int getId() {
         return id;
     }
